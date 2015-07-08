@@ -1,0 +1,8 @@
+; &Id:$
+name = Ctools plugins
+description = Ctools content type form
+package = Anton L. Modules
+core = 7.x
+version = "7.x-1.x dev"
+
+dependencies[] = ctools
