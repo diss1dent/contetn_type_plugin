@@ -43,7 +43,7 @@ function form_edit_form_submit($form, &$form_state) {
  * Render callback for the content type.
  */
 
-function form_content_type_render($subtype, $conffig, $args, $context) {
+function form_content_type_render($subtype, $config, $args, $context) {
 
   if (empty($config['text'])) {
     return;
