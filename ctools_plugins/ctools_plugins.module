@@ -8,3 +8,22 @@ function ctools_plugins_ctools_plugin_directory($module, $plugin) {
     return 'plugins/' . $plugin;
   }
 }
+
+function my_rendering_form($form, &$form_state) {
+
+  $form['message'] = [
+    '#type' => 'textarea',
+    '#title' => t('Message'),
+    '#required' => TRUE,
+  ];
+  $form['submit'] = [
+    '#type' => 'submit',
+    '#value' => t('Submit'),
+  ];
+
+  return $form;
+}
+
+function my_rendering_form_submit($form, &$form_state) {
+  drupal_set_message(t('Form message: @values', array('@values' => var_export($form_state['values']['message'], TRUE))));
+}

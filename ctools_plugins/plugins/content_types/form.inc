@@ -32,24 +32,31 @@ function form_edit_form($form, &$form_state) {
 
 function form_edit_form_submit($form, &$form_state) {
 
-  $form_state['config'] = array(
+  $form_state['conf'] = array(
     'text' => $form_state['values']['text'],
   );
 
-  drupal_set_message(t('Submitting Text: @values', array('@values' => var_export($form_state['values'], TRUE))));
+  drupal_set_message(t('Submitting Text: @values', array('@values' => var_export($form_state['values']['message'], TRUE))));
 }
 
 /**
  * Render callback for the content type.
  */
 
-function form_content_type_render($subtype, $config, $args, $context) {
+function form_content_type_render($subtype, $conf, $args, $context) {
 
-  if (empty($config['text'])) {
-    return;
-  }
+  $form = drupal_get_form('my_rendering_form');
+  $form_render = drupal_render($form);
 
   $block = new stdClass();
-  $block->content = $config['text'];
+  $block->content = '';
+
+  if (empty($conf['text'])) {
+    $block->content .= $conf['text'];
+  }
+
+  $block->content = $conf['text'];
+  $block->content .= $form_render;
+
   return $block;
 }
